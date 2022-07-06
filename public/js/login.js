@@ -1,28 +1,31 @@
 function logar(){
     var nomes = document.getElementById('nomes').value
-    var senhas = document.getElementById('senha').value
+    var senha = document.getElementById('senha').value
 
-    console.log(JSON.stringify({
-        nomes: nomes,
-        senha: senha
-    }));
+console.log(JSON.stringify({
+    nomes:nomes,
+    senha:senha
+}));
 
-    fetch("login",{
+    fetch("/login",{
         method:'POST',
         body: JSON.stringify({
-            nomes: nomes,
-            senha: senha
-        }),
-        headers:{"content-type" : "application/json"}
+            nomes:nomes,
+            senha:senha
+        }) , 
+        headers: { "Content-Type" : "application/json" }
+        
     })
 
     .then(async (resp) => {
-        var status = await resp.text()
+        var status = await resp.text();
         console.log(status)
-        if(status == 'conectado'){
+        if(status == 'conectado' ){
             location.href = '/acesso-restrito/acesso.html'
-        } else {
-            alert('Nome ou senha incorretos!')
+        }else {
+            alert('nome e senha invalidos!!')
         }
-    })
+        
+    });
+
 }
